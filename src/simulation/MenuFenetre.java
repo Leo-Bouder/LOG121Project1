@@ -148,7 +148,6 @@ public class MenuFenetre extends JMenuBar {
 								String typeU = usineMeta.getAttribute("type");
 								if(typeU.equals("usine-matiere")){
 									interval = Integer.parseInt(usineMeta.getElementsByTagName("interval-production").item(0).getTextContent());
-									System.out.println(interval);
 									NodeList iconeS = nodeUsineMeta.getChildNodes();
 									Node listIcones = iconeS.item(1);
 									Element iconesEl = (Element) listIcones;
@@ -174,7 +173,6 @@ public class MenuFenetre extends JMenuBar {
 								if(typeU.equals("usine-aile")){
 									NodeList icones = nodeUsineMeta.getChildNodes();
 									interval = Integer.parseInt(usineMeta.getElementsByTagName("interval-production").item(0).getTextContent());
-									System.out.println(interval);
 									Node listIcones = icones.item(1);
 									Element iconesEl = (Element) listIcones;
 									NodeList listIcone = iconesEl.getElementsByTagName("icone");
@@ -198,7 +196,6 @@ public class MenuFenetre extends JMenuBar {
 								if(typeU.equals("usine-assemblage")){
 									NodeList iconeS = nodeUsineMeta.getChildNodes();
 									interval = Integer.parseInt(usineMeta.getElementsByTagName("interval-production").item(0).getTextContent());
-									System.out.println(interval);
 									Node listIcones = iconeS.item(1);
 									Element iconesEl = (Element) listIcones;
 									NodeList listIcone = iconesEl.getElementsByTagName("icone");
@@ -222,7 +219,6 @@ public class MenuFenetre extends JMenuBar {
 								if(typeU.equals("usine-moteur")){
 									NodeList iconeS = nodeUsineMeta.getChildNodes();
 									interval = Integer.parseInt(usineMeta.getElementsByTagName("interval-production").item(0).getTextContent());
-									System.out.println(interval);
 									Node listIcones = iconeS.item(1);
 									Element iconesEl = (Element) listIcones;
 									NodeList listIcone = iconesEl.getElementsByTagName("icone");

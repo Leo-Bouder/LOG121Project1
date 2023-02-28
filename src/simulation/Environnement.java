@@ -22,11 +22,17 @@ public class Environnement extends SwingWorker<Object, String> implements Proper
 	protected Object doInBackground() throws Exception {
 		while(actif) {
 			if(list != null){
+				for(Usine usine : list){
+					if((usine.getId() == 11) || (usine.getId() == 13) || (usine.getId() == 12)){
+
+					}
+				}
+				//Toutes les 5 millisecondes le programme reprend
 				Thread.sleep(DELAI);
 				/**
 				 * C'est ici que vous aurez � faire la gestion de la notion de tour.
 				 */
-				System.out.println("Attention List : " + list.toString());
+				//System.out.println("Attention List : " + list.toString());
 				firePropertyChange("TEST", null, null);
 			}
 		}

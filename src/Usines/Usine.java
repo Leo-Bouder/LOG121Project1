@@ -15,6 +15,8 @@ public class Usine implements EventUsines {
 
     public HashMap<String, String> icones;
 
+    protected Composant sortieComposant;
+
     protected int interval;
 
     protected String pathCourant;
@@ -25,6 +27,10 @@ public class Usine implements EventUsines {
         this.id = id;
         this.entree = new HashMap<>();
         this.icones = map;
+    }
+
+    public Composant getSortieComposant(){
+        return this.sortieComposant;
     }
 
     public int getPosX() {
@@ -86,6 +92,7 @@ public class Usine implements EventUsines {
                 ", posY=" + posY +
                 ", id=" + id +
                 ", icones=" + icones +
+                ", sortieComposant=" + sortieComposant +
                 '}';
     }
 
