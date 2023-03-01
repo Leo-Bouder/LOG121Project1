@@ -1,6 +1,8 @@
 package simulation;
 
 import Composants.Chemins;
+import Composants.Composant;
+import Donnees.Donnees;
 import Usines.Usine;
 
 import java.awt.Graphics;
@@ -10,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -48,21 +51,27 @@ public class PanneauPrincipal extends JPanel {
 	}
 
 	public void paintComposants(Graphics g) throws IOException {
-		for(Usine usine : this.list){
-			if((usine.getId() == 11) || (usine.getId() == 13) || (usine.getId() == 12)){
-				String pathMetal = "src/ressources/metal.png";
-				File metal = new File(pathMetal);
-				BufferedImage IconMetal = ImageIO.read(metal);
-				int posX = usine.getSortieComposant().getPosX();
-				int posY = usine.getSortieComposant().getPosY();
-				g.drawImage(IconMetal,posX,posY,null);
-				System.out.println("Compo1 X : " + posX);
-				System.out.println("Compo1 Y : " + posY);
-				usine.getSortieComposant().setPosX(posX + 5);
-				usine.getSortieComposant().setPosY(posY + 5);
-				System.out.println("Compo X : " + posX);
-				System.out.println("Compo Y : " + posY);
+		ArrayList<Usine> listUsines = Donnees.getInstance().getListeUsine();
+		for(Usine usine : listUsines){
+			if((usine.getId() == 11) || (usine.getId() == 12) || (usine.getId() == 13)){
+				//System.out.println(usine.getSortieComposant());
+				System.out.println(usine.getId());
+				if(usine.getSortieComposant() != null){
+					for(Composant compo : usine.getSortieComposant()){
+						System.out.println(compo.getPosX());
+						String pathMetal = "src/ressources/metal.png";
+						File metal = new File(pathMetal);
+						BufferedImage IconMetal = ImageIO.read(metal);
+						int posX = compo.getPosX();
+						int posY = compo.getPosY();
+						g.drawImage(IconMetal,posX,posY,null);
+						compo.setPosX(posX+1);
+						compo.setPosY(posY+1);
+					}
+				}
+
 			}
+			Donnees.getInstance().setListeUsine(listUsines);
 		}
 	}
 

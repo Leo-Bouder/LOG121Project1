@@ -99,7 +99,7 @@ public class MenuFenetre extends JMenuBar {
 					Element metaElem = (Element) nListMat;
 					NodeList listUsineMeta =  metaElem.getElementsByTagName("usine");
 
-					//Intervalle
+					//Interval
 
 
 					for(int i = 0; i < listUsine.getLength(); i++){
@@ -274,6 +274,8 @@ public class MenuFenetre extends JMenuBar {
 					}
 					//Création d'évenements pour passer les données à la fenêtre principale
 					//System.out.println("Liste Usine : " +donnees.getListeUsine().toString());
+					Donnees d = Donnees.getInstance();
+					d.setListeUsine(listU);
 					fenetre.propertyChange(new PropertyChangeEvent("PARSER", "ParserUsines", null, listU));
 					fenetre.propertyChange(new PropertyChangeEvent("PARSER", "ParserChemins", null, listC));
 				} catch (ParserConfigurationException ex) {

@@ -3,8 +3,8 @@ package Composants;
 public class Composant {
 
     protected String path;
-    public static int posX;
-    public static int posY;
+    public int posX;
+    public int posY;
 
     public Composant(String path){
         this.path = path;

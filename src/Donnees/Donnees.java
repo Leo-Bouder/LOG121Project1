@@ -10,12 +10,12 @@ public final class Donnees {
 
     private ArrayList<Usine> listeUsine = new ArrayList<>();
     private List<Chemins> listeChemins;
-    private static Donnees instance;
+    private static Donnees instance = null;
     private String[] listIcones = new String[7];
 
     public static boolean init = false;
 
-    public List<Usine> getListeUsine() {
+    public ArrayList<Usine> getListeUsine() {
         return this.listeUsine;
     }
 
@@ -45,7 +45,7 @@ public final class Donnees {
 
     public static Donnees getInstance(){
         if(instance == null){
-            return new Donnees();
+            instance = new Donnees();
         }
         return instance;
     }

@@ -4,7 +4,9 @@ import Composants.Composant;
 import Patrons.EventUsines;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Usine implements EventUsines {
 
@@ -15,9 +17,12 @@ public class Usine implements EventUsines {
 
     public HashMap<String, String> icones;
 
-    protected Composant sortieComposant;
+    protected ArrayList<Composant> sortieComposant;
 
     protected int interval;
+    protected int intervalEnCours;
+
+
 
     protected String pathCourant;
 
@@ -27,9 +32,10 @@ public class Usine implements EventUsines {
         this.id = id;
         this.entree = new HashMap<>();
         this.icones = map;
+        this.sortieComposant = new ArrayList<>();
     }
 
-    public Composant getSortieComposant(){
+    public List<Composant> getSortieComposant(){
         return this.sortieComposant;
     }
 
@@ -83,6 +89,26 @@ public class Usine implements EventUsines {
 
     public void update() {
 
+    }
+
+    public int getIntervalEnCours() {
+        return intervalEnCours;
+    }
+
+    public void setIntervalEnCours(int intervalEnCours) {
+        this.intervalEnCours = intervalEnCours;
+    }
+
+    public void addCompo(Composant composant){
+        this.sortieComposant.add(composant);
+    }
+
+    public void removeCompo(Composant composant){
+        this.sortieComposant.remove(composant);
+    }
+
+    public void setInterval(int interval) {
+        this.interval = interval;
     }
 
     @Override
