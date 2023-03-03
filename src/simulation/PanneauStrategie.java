@@ -1,5 +1,7 @@
 package simulation;
 
+import Donnees.Donnees;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.util.Enumeration;
@@ -18,22 +20,22 @@ public class PanneauStrategie extends JPanel {
 	public PanneauStrategie() {
 
 		ButtonGroup groupeBoutons = new ButtonGroup();
-		JRadioButton strategie1 = new JRadioButton("Stratégie 1");
-		JRadioButton strategie2 = new JRadioButton("Stratégie 2");	
+		JRadioButton strategie1 = new JRadioButton("StratÃ©gie 1");
+		JRadioButton strategie2 = new JRadioButton("StratÃ©gie 2");
 		
 		JButton boutonConfirmer = new JButton("Confirmer");
 
 		boutonConfirmer.addActionListener((ActionEvent e) -> {
-			// TODO - Appeler la bonne stratégie
+			// TODO - Appeler la bonne stratï¿½gie
 			System.out.println(getSelectedButtonText(groupeBoutons));
-			// Fermer la fenêtre du composant
+			// Fermer la fenï¿½tre du composant
 			SwingUtilities.getWindowAncestor((Component) e.getSource()).dispose();
 		});
 
 		JButton boutonAnnuler = new JButton("Annuler");
 
 		boutonAnnuler.addActionListener((ActionEvent e) -> {
-			// Fermer la fenêtre du composant
+			// Fermer la fenï¿½tre du composant
 			SwingUtilities.getWindowAncestor((Component) e.getSource()).dispose();
 		});
 
@@ -47,18 +49,30 @@ public class PanneauStrategie extends JPanel {
 	}
 
 	/**
-	 * Retourne le bouton sélectionné dans un groupe de boutons.
+	 * Retourne le bouton sï¿½lectionnï¿½ dans un groupe de boutons.
 	 * @param groupeBoutons
 	 * @return
 	 */
 	public String getSelectedButtonText(ButtonGroup groupeBoutons) {
+		Donnees d = Donnees.getInstance();
 		for (Enumeration<AbstractButton> boutons = groupeBoutons.getElements(); boutons.hasMoreElements();) {
 			AbstractButton bouton = boutons.nextElement();
+			if(!bouton.isSelected()){
+				StrategieFixe strat = new StrategieFixe(1500);
+				strat.vente();
+			}
 			if (bouton.isSelected()) {
+				if(bouton.getText().equals("StratÃ©gie 1")){
+					StrategieFixe strat = new StrategieFixe(1500);
+					strat.vente();
+				}
+				else if(bouton.getText().equals("StratÃ©gie 2")){
+					StrategieAleatoire strat = new StrategieAleatoire((int) (Math.random() * (120 - 70)) + 70);
+					strat.vente();
+				}
 				return bouton.getText();
 			}
 		}
-
 		return null;
 	}
 

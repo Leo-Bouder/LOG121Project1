@@ -1,24 +1,30 @@
 package Usines;
 
 import Composants.Composant;
-import Composants.Moteur;
-import Patrons.EventUsines;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UsineMoteur extends Usine implements EventUsines {
+public class UsineMoteur extends Usine{
 
-    protected HashMap<Composant, Integer> sortie;
     protected List<Composant> sortieComposant;
     protected int intervalProduction;
-    public UsineMoteur(int posX, int posY, int id, HashMap<String, String> map, int intervalProduction) {
-        super(posX, posY, id, map);
+    protected boolean construire = false;
+    protected int compteurMetal;
+    public UsineMoteur(int posX, int posY, int id, HashMap<String, String> map, int intervalProduction, boolean con) {
+        super(posX, posY, id, map, con);
         this.intervalProduction = intervalProduction;
-        this.sortie = new HashMap<>();
         this.sortieComposant = new ArrayList<>();
         //this.sortieComposant = new Moteur("src/ressources/moteur.png", posX, posY);
+    }
+
+    public  int getCompteurMetal() {
+        return this.compteurMetal;
+    }
+
+    public void setCompteurMetal(int compteurMetal) {
+        this.compteurMetal = compteurMetal;
     }
 
     public List<Composant> getSortieComposant() {
@@ -39,4 +45,5 @@ public class UsineMoteur extends Usine implements EventUsines {
     public void removeCompo(Composant composant){
         this.sortieComposant.remove(composant);
     }
+
 }

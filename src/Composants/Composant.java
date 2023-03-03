@@ -6,8 +6,19 @@ public class Composant {
     public int posX;
     public int posY;
 
-    public Composant(String path){
+    private double angle;
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public Composant(String path, double angle){
         this.path = path;
+        this.angle = angle;
     }
 
     public String getPath(){

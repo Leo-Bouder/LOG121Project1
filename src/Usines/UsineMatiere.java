@@ -1,22 +1,18 @@
 package Usines;
 
 import Composants.Composant;
-import Composants.Metal;
-import Patrons.EventUsines;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UsineMatiere extends Usine implements EventUsines {
+public class UsineMatiere extends Usine {
 
-    protected HashMap<Composant, Integer> sortie;
 
     protected int intervalProduction;
-    public UsineMatiere(int posX, int posY, int id, HashMap<String, String> map, int intervalProduction) {
-        super(posX, posY, id, map);
+    protected boolean construire = true;
+    public UsineMatiere(int posX, int posY, int id, HashMap<String, String> map, int intervalProduction, boolean con) {
+        super(posX, posY, id, map, con);
         this.intervalProduction = intervalProduction;
-        this.sortie = new HashMap<>();
         //this.sortieComposant = new Metal("src/ressources/metal.png", posX, posY);
     }
 
@@ -31,5 +27,6 @@ public class UsineMatiere extends Usine implements EventUsines {
     public void addHash(String type, String path){
         this.icones.put(type, path);
     }
+
 
 }

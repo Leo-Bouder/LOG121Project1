@@ -1,26 +1,47 @@
 package Usines;
 
-import Composants.Avion;
-import Patrons.EventManager;
+import simulation.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Entrepot extends Usine{
 
-    protected ArrayList<Avion> listeAvions;
-    protected EventManager event;
-    protected int capacite;
+    protected int intervalProduction = 0;
+    protected List<Usine> list;
+    protected int capacite = 0;
+    protected boolean construire = false;
+    protected Observateur obs;
 
 
-    public Entrepot(int posX, int posY, int id,HashMap<String, String> map ) {
-        super(posX, posY, id, map);
-        this.listeAvions = new ArrayList<>();
-        this.capacite = 5;
+    public Entrepot(int posX, int posY, int id,HashMap<String, String> map, boolean con) {
+        super(posX, posY, id, map, con);
+        this.list = new ArrayList<>();
     }
 
-    public void notifyUsines(){
-        this.event.notifyUsines();
+    public List<Usine> getList() {
+        return list;
+    }
+
+    public void setObs(Observateur obs) {
+        this.obs = obs;
+    }
+
+    public int getIntervalProduction() {
+        return intervalProduction;
+    }
+
+    public int getCapacite() {
+        return capacite;
+    }
+
+    public void setCapacite(int capacite) {
+        this.capacite = capacite;
+    }
+
+    public void setIntervalProduction(int intervalProduction) {
+        this.intervalProduction = intervalProduction;
     }
 
     public String icones(){
@@ -29,5 +50,9 @@ public class Entrepot extends Usine{
             string += icones.size();
         }
         return string;
+    }
+
+    public void notifyU(){
+        obs.notifyU(this.capacite);
     }
 }

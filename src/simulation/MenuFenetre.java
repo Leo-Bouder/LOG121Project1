@@ -2,7 +2,6 @@ package simulation;
 
 import Composants.Chemins;
 import Donnees.Donnees;
-import Patrons.EventManager;
 import Usines.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -38,7 +37,6 @@ public class MenuFenetre extends JMenuBar {
 	private static final String MENU_SIMULATION_CHOISIR = "Choisir";
 	private static final String MENU_AIDE_TITRE = "Aide";
 	private static final String MENU_AIDE_PROPOS = "� propos de...";
-	public EventManager eventManager;
 	private FenetrePrincipale fenetre;
 
 	public MenuFenetre(FenetrePrincipale fenetre) {
@@ -46,7 +44,6 @@ public class MenuFenetre extends JMenuBar {
 		ajouterMenuSimulation();
 		ajouterMenuAide();
 		this.fenetre = fenetre;
-		this.eventManager = new EventManager(fenetre);
 	}
 
 	/**
@@ -100,8 +97,6 @@ public class MenuFenetre extends JMenuBar {
 					NodeList listUsineMeta =  metaElem.getElementsByTagName("usine");
 
 					//Interval
-
-
 					for(int i = 0; i < listUsine.getLength(); i++){
 
 						Node nodeUsine = listUsine.item(i);
@@ -115,7 +110,6 @@ public class MenuFenetre extends JMenuBar {
 						HashMap<String, String> map = new HashMap<>();
 						if(type.equals("entrepot")){
 							HashMap<String, String> hashMap = new HashMap<>();
-
 							//Boucle pour récupérer les usines et leurs données
 							for(int j = 0; j < listUsineMeta.getLength(); j++){
 								Node nodeUsineMeta = listUsineMeta.item(j);
@@ -136,9 +130,8 @@ public class MenuFenetre extends JMenuBar {
 								}
 							}
 							//Création de l'objet Entrepôt
-							Entrepot entrepot = new Entrepot(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap);
+							Entrepot entrepot = new Entrepot(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, false);
 							listU.add(entrepot);
-							eventManager.attach(entrepot);
 						}
 						else if(type.equals("usine-matiere")){
 							HashMap<String, String> hashMap = new HashMap<>();
@@ -160,9 +153,8 @@ public class MenuFenetre extends JMenuBar {
 									}
 								}
 							}
-							UsineMatiere usineMatiere = new UsineMatiere(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval);
+							UsineMatiere usineMatiere = new UsineMatiere(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval, true);
 							listU.add(usineMatiere);
-							eventManager.attach(usineMatiere);
 						}
 						else if(type.equals("usine-aile")){
 							HashMap<String, String> hashMap = new HashMap<>();
@@ -183,9 +175,8 @@ public class MenuFenetre extends JMenuBar {
 									}
 								}
 							}
-							UsineAile usineAile = new UsineAile(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval);
+							UsineAile usineAile = new UsineAile(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval, false);
 							listU.add(usineAile);
-							eventManager.attach(usineAile);
 						}
 						else if(type.equals("usine-assemblage")){
 							HashMap<String, String> hashMap = new HashMap<>();
@@ -206,9 +197,8 @@ public class MenuFenetre extends JMenuBar {
 									}
 								}
 							}
-							Usine usineAssemblage = new UsineAssemblage(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap,interval);
+							Usine usineAssemblage = new UsineAssemblage(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap,interval, false);
 							listU.add(usineAssemblage);
-							eventManager.attach(usineAssemblage);
 						}
 						else if(type.equals("usine-moteur")){
 							HashMap<String, String> hashMap = new HashMap<>();
@@ -229,9 +219,8 @@ public class MenuFenetre extends JMenuBar {
 									}
 								}
 							}
-							Usine usineMoteur = new UsineMoteur(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval);
+							Usine usineMoteur = new UsineMoteur(Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(id), hashMap, interval, false);
 							listU.add(usineMoteur);
-							eventManager.attach(usineMoteur);
 						}
 					}
 
@@ -249,8 +238,9 @@ public class MenuFenetre extends JMenuBar {
 						int de = Integer.parseInt(cheminEl.getAttribute("de"));
 						int vers = Integer.parseInt(cheminEl.getAttribute("vers"));
 						Chemins chemin = new Chemins();
-
-						for (Usine usine: eventManager.getListeUsines()) {
+						Donnees d = Donnees.getInstance();
+						System.out.println(d.getListeUsine());
+						for (Usine usine: listU) {
 							//Récupérer la position de l'usine de départ
 							if(de == usine.getId()){
 								x1 = usine.getPosX();
@@ -268,13 +258,25 @@ public class MenuFenetre extends JMenuBar {
 							//Vérification de la non nullité (vide ou pas) du chemin
 							if((chemin.getX1() != 0) & (chemin.getX2() != 0) & (chemin.getY1() != 0) & (chemin.getY2() != 0)){
 								listC.add(chemin);
-								eventManager.attachChemins(chemin);
 							}
 						}
 					}
 					//Création d'évenements pour passer les données à la fenêtre principale
 					//System.out.println("Liste Usine : " +donnees.getListeUsine().toString());
 					Donnees d = Donnees.getInstance();
+					Observateur observateur = new Observateur();
+					int idEntrepot = 0;
+					for(int i = 0; i < listU.size(); i++){
+						if(listU.get(i).getId() == 51){
+							idEntrepot = i;
+						}
+					}
+					for(Usine usine : listU){
+						if(usine.getId() != 51){
+							observateur.attach(usine);
+						}
+					}
+					((Entrepot) listU.get(idEntrepot)).setObs(observateur);
 					d.setListeUsine(listU);
 					fenetre.propertyChange(new PropertyChangeEvent("PARSER", "ParserUsines", null, listU));
 					fenetre.propertyChange(new PropertyChangeEvent("PARSER", "ParserChemins", null, listC));
