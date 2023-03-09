@@ -12,9 +12,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Environnement.
+ */
 public class Environnement extends SwingWorker<Object, String> implements PropertyChangeListener {
 	private boolean actif = true;
-	private static final int DELAI = 5;
+	private static final int DELAI = 8;
 	private ArrayList<Usine> list = new ArrayList<>();
 	private static int delai = 0;
 
@@ -118,6 +121,13 @@ public class Environnement extends SwingWorker<Object, String> implements Proper
 		return null;
 	}
 
+	/**
+	 * Set icones.
+	 *
+	 * @param usine              the usine
+	 * @param intervalEnCours    the interval en cours
+	 * @param intervalproduction the intervalproduction
+	 */
 	public void setIcones(Usine usine, int intervalEnCours, int intervalproduction){
 		if(usine.getId() != 51){
 			if(intervalEnCours >= intervalproduction){

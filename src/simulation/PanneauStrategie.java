@@ -13,10 +13,16 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
+/**
+ * The type Panneau strategie.
+ */
 public class PanneauStrategie extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new Panneau strategie.
+	 */
 	public PanneauStrategie() {
 
 		ButtonGroup groupeBoutons = new ButtonGroup();
@@ -50,8 +56,9 @@ public class PanneauStrategie extends JPanel {
 
 	/**
 	 * Retourne le bouton s�lectionn� dans un groupe de boutons.
-	 * @param groupeBoutons
-	 * @return
+	 *
+	 * @param groupeBoutons the groupe boutons
+	 * @return selected button text
 	 */
 	public String getSelectedButtonText(ButtonGroup groupeBoutons) {
 		Donnees d = Donnees.getInstance();

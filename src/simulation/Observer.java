@@ -1,6 +1,14 @@
 package simulation;
 
+/**
+ * The interface Observer.
+ */
 public interface Observer {
 
-    public void update(int capcite);
+    /**
+     * Update.
+     *
+     * @param capacite the capacite
+     */
+    public void update(int capacite);
 }

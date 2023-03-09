@@ -3,10 +3,21 @@ package simulation;
 import Donnees.Donnees;
 import Usines.Entrepot;
 
+/**
+ * The type Strategie aleatoire.
+ */
 public class StrategieAleatoire implements Strategie{
 
+    /**
+     * The Interval.
+     */
     protected int interval;
 
+    /**
+     * Instantiates a new Strategie aleatoire.
+     *
+     * @param inter the inter
+     */
     public StrategieAleatoire(int inter){
         this.interval = inter;
     }

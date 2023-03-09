@@ -4,13 +4,19 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+/**
+ * The type Fenetre strategie.
+ */
 public class FenetreStrategie extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final String TITRE_FENETRE = "Sélectionnez votre stratégie de vente";
+	private static final String TITRE_FENETRE = "Sï¿½lectionnez votre stratï¿½gie de vente";
 	private static final Dimension DIMENSION = new Dimension(250, 100);
 	private PanneauStrategie panneauStrategie = new PanneauStrategie();
 
+	/**
+	 * Instantiates a new Fenetre strategie.
+	 */
 	public FenetreStrategie() {
 		add(panneauStrategie);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

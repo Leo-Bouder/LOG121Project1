@@ -12,6 +12,9 @@ import java.util.List;
 
 import javax.swing.*;
 
+/**
+ * The type Fenetre principale.
+ */
 public class FenetrePrincipale extends JFrame implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
@@ -19,8 +22,14 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener 
 	private static final Dimension DIMENSION = new Dimension(700, 700);
 
 
+	/**
+	 * The Panneau principal.
+	 */
 	PanneauPrincipal panneauPrincipal;
 
+	/**
+	 * Instantiates a new Fenetre principale.
+	 */
 	public FenetrePrincipale() {
 		panneauPrincipal = new PanneauPrincipal();
 		MenuFenetre menuFenetre = new MenuFenetre(this);

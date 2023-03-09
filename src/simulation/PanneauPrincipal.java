@@ -23,6 +23,9 @@ import javax.swing.*;
 import static java.lang.Math.PI;
 import static java.lang.Math.atan2;
 
+/**
+ * The type Panneau principal.
+ */
 public class PanneauPrincipal extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -51,12 +54,23 @@ public class PanneauPrincipal extends JPanel {
 			}
 	}
 
+	/**
+	 * Paint chemins.
+	 *
+	 * @param g the g
+	 */
 	public void paintChemins(Graphics g){
 		for (Chemins chemin : this.listChemins) {
 			g.drawLine(chemin.getX1(), chemin.getY1(), chemin.getX2(), chemin.getY2());
 		}
 	}
 
+	/**
+	 * Paint composants.
+	 *
+	 * @param g the g
+	 * @throws IOException the io exception
+	 */
 	public void paintComposants(Graphics g) throws IOException {
 		ArrayList<Usine> listUsines = Donnees.getInstance().getListeUsine();
 		for(Usine usine : listUsines){
@@ -139,6 +153,12 @@ public class PanneauPrincipal extends JPanel {
 		}
 	}
 
+	/**
+	 * Paint usines.
+	 *
+	 * @param g the g
+	 * @throws IOException the io exception
+	 */
 	public void paintUsines(Graphics g) throws IOException {
 		for (Usine usine: list) {
 			if(usine.getCurrentIcone() != null){
@@ -150,18 +170,38 @@ public class PanneauPrincipal extends JPanel {
 		}
 	}
 
+	/**
+	 * Gets list chemins.
+	 *
+	 * @return the list chemins
+	 */
 	public ArrayList<Chemins> getListChemins() {
 		return listChemins;
 	}
 
+	/**
+	 * Sets list chemins.
+	 *
+	 * @param listChemins the list chemins
+	 */
 	public void setListChemins(ArrayList<Chemins> listChemins) {
 		this.listChemins = listChemins;
 	}
 
+	/**
+	 * Create.
+	 *
+	 * @param listUsine the list usine
+	 */
 	public void create(ArrayList<Usine> listUsine){
 		this.list = listUsine;
 	}
 
+	/**
+	 * Create chemins.
+	 *
+	 * @param listChemins the list chemins
+	 */
 	public void createChemins(ArrayList<Chemins> listChemins){
 		this.listChemins = listChemins;
 	}

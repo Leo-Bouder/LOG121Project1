@@ -27,6 +27,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * The type Menu fenetre.
+ */
 public class MenuFenetre extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +42,11 @@ public class MenuFenetre extends JMenuBar {
 	private static final String MENU_AIDE_PROPOS = "� propos de...";
 	private FenetrePrincipale fenetre;
 
+	/**
+	 * Instantiates a new Menu fenetre.
+	 *
+	 * @param fenetre the fenetre
+	 */
 	public MenuFenetre(FenetrePrincipale fenetre) {
 		ajouterMenuFichier();
 		ajouterMenuSimulation();
@@ -71,12 +79,13 @@ public class MenuFenetre extends JMenuBar {
 
 				DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 				try {
-					ArrayList<Usine> listU = new ArrayList<>();
+
 					DocumentBuilder db = dbf.newDocumentBuilder();
 					Document doc = db.parse(new File(path));
 					doc.getDocumentElement().normalize();
 					doc.getDocumentElement();
 
+					ArrayList<Usine> listU = new ArrayList<>();
 					//Pour rentrer dans la balise simulation
 					NodeList nList = doc.getElementsByTagName("simulation");
 
